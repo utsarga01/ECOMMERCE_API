@@ -16,14 +16,14 @@ const userSchema = new mongoose.Schema({
     required:true,
     trim:true,
   },
-  firstName:{
+  firstName: {
     type:String,
     required:true,
     trim:true,
     maxlength:30,
     
   },
-  lastName:{
+  lastName: {
     type:String,
     required:true,
     trim:true,
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
     required:true,
     enum:['male','female','other'],
   },
-  role:{
+  role: {
     type:String,
     required:true,
     enum:['buyer','seller'],
