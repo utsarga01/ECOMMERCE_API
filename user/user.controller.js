@@ -8,6 +8,7 @@ import {
 } from "./user.validation.js";
 import validateReqBody from "../middleware/validation.req.body.js";
 import jwt from "jsonwebtoken";
+
 const router = express.Router();
 
 // *register user
@@ -36,7 +37,7 @@ router.post(
     const newUser = req.body;
 
     //find user using email
-    const user = await User.findOne({ email: newUser });
+    const user = await User.findOne({ email: newUser.email });
 
     //if user exists throw error
     if (user) {
