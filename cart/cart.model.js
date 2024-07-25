@@ -14,13 +14,17 @@ const cartSchema = new mongoose.Schema({
     ref: "Product",
     required: true,
   },
+
   orderedQuantity: {
     type: Number,
     min: 1,
     required: true,
   },
+
 });
 
 //create model
 
-const Cart = mongoose.model;
+const Cart = mongoose.model("Cart",cartSchema);
+
+export default Cart;

@@ -13,5 +13,6 @@ const validateMongoIdFromParams = (req, res, next) => {
     return res.status(400).send({ message: "Invalid  mongo id," });
   }
   //call next function
+  next(); 
 };
 export default validateMongoIdFromParams;
