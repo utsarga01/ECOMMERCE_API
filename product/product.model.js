@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 import { productCategories } from '../constant/general.constant.js';
 
 // set schema
@@ -53,10 +53,15 @@ const productSchema = new mongoose.Schema({
     required: false,
     default: null,
   },
-});
+},
+{
+  timestamps:true,
+}
+
+);
 
 productSchema.methods.toJSON = function () {
-  let obj = this.toObject();
+  let obj = this.toObject();//it converts bson to json
   delete obj.sellerId;
   return obj;
 };
