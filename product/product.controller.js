@@ -143,6 +143,30 @@ router.get(
     });
   }
 );
+// router.get(
+//   "/product/detail/:id",
+//   isUser,
+//   validateMongoIdFromParams,
+//   async (req, res) => {
+//     //extract product id from req.params
+//     const productId = req.params.id;
+
+//     //find product using product id
+//     const product = await Product.findOne({ _id: productId });
+
+//     //if not product ,throw error
+//     if (!product) {
+//       return res.status(404).send({ message: "Product does not exist" });
+//     }
+
+//     //send res
+
+//     return res.status(200).send({
+//       message: "success",
+//       productDetail: product,
+//     });
+//   }
+// );
 
 // *list product by seller
 router.post(
