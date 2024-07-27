@@ -252,5 +252,88 @@ router.post(
     return res.status(200).send({ message: "success", productList: products });
   }
 );
+router.post(
+  "/product/seller/list",
+  isSeller,
+  validateReqBody(paginationDataValidationSchema),
+  async (req, res) => {
+    //extract pagination data from req.body
+    const { page, limit } = req.body;
+
+    //calculate skip
+
+    const skip = (page - 1) * limit;
+
+    //condition
+
+    let match = { sellerId: req.loggedInUserId };
+    if (searchText) {
+      match.name = { $regex: searchText, $options: "i" };
+    }
+
+    const products = await Product.aggregate([
+      {
+        $match: { sellerId: req.loggedInUserId },
+      },
+      {
+        $skip: skip,
+      },
+      { $limit: limit },
+      {
+        $project: {
+          name: 1,
+          price: 1,
+          brand: 1,
+          image: 1,
+          description: { $substr: ["$description", 0, 200] },
+        },
+      },
+    ]);
+
+    return res.status(200).send({ message: "success", productList: products });
+  }
+);
+// router.post(
+//   "/product/buyer/list",
+//   isBuyer,
+//   validateReqBody(paginationDataValidationSchema),
+//   async (req, res) => {
+//     //extract pagination data from req.body
+//     const { page, limit,searchText } = req.body;
+
+//     //calculate skip
+
+//     const skip = (page - 1) * limit;
+
+//     //condition
+
+//     let match = {};
+
+//     if (searchText) {
+//       match.name = { $regex: searchText, $options: "i" };
+//     }
+
+//     const products = await Product.aggregate([
+//       {
+//         $match: {},
+//       },
+//       {
+//         $skip: skip,
+//       },
+//       { $limit: limit },
+//       {
+//         $project: {
+//           name: 1,
+//           price: 1,
+//           brand: 1,
+//           image: 1,
+//           description: { $substr: ["$description", 0, 200] },
+//         },
+//       },
+//     ]);
+
+//     return res.status(200).send({ message: "success", productList: products });
+//   }
+// );
 
 export default router;
