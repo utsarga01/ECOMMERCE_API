@@ -95,4 +95,31 @@ router.delete(
     return res.status.send({ message: "Cart item is removed successfully" });
   }
 );
+// router.delete(
+//   "/cart/item/delete/:id",
+//   isBuyer,
+//   validateMongoIdFromParams,
+//   async (req, res) => {
+//     //extract cartId from req.params
+//     const cartId = req.params.id;
+
+//     //check cart ownership
+//     const cart = await Cart.findOne({
+//       _id: cartId,
+//       buyerId: req.loggedInUserId,
+//     });
+//     // if not cart ,throw error
+//     if (!cart) {
+//       return res
+//         .status(403)
+//         .send({ message: "You are not owner of this cart" });
+//     }
+
+//     //    delete cart
+//     await Cart.deleteOne({ _id: cartId, buyerId: req.loggedInUserId });
+
+//     //
+//     return res.status.send({ message: "Cart item is removed successfully" });
+//   }
+// );
 export default router;
